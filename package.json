@@ -1,0 +1,20 @@
+{
+  "name": "reporte-gastos",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Alberto Dailey",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.11.1",
+    "jsonwebtoken": "^8.5.1",
+    "luxon": "^1.27.0",
+    "mongoose": "^5.12.10",
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  }
+}

@@ -16,8 +16,6 @@ const UserModel = mongoose.model("User", UserSchema);
 function signUp(data, callback) {
   let User = new UserModel(data);
 
-  console.log(data);
-
   User.save((err, userData) => {
     if (err) {
       if (err.code === 11000) {
@@ -55,7 +53,23 @@ function login(data, callback) {
   });
 }
 
+function getUser(id, callback) {
+  UserModel.findById(id, (err, userStored) => {
+    if (err) {
+      console.log(err);
+      callback({ message: "Ha ocurrido un error", status: 500 });
+    } else {
+      if (!userStored) {
+        callback({ message: "Usuario no encontrado", status: 404 });
+      } else {
+        callback({ userStored, status: 200 });
+      }
+    }
+  });
+}
+
 module.exports = {
   signUp,
   login,
+  getUser,
 };

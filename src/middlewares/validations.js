@@ -41,4 +41,51 @@ const validateLogin = [
   },
 ];
 
-module.exports = { validateUser, validateLogin };
+const validateEmployee = [
+  check("name").trim().notEmpty().withMessage("Ingrese el nombre"),
+  check("lastname").trim().notEmpty().withMessage("Ingrese el apellido"),
+  check("id").trim().notEmpty().withMessage("Ingrese el id"),
+  check("position").trim().notEmpty().withMessage("Ingrese la posicion"),
+  check("department").trim().notEmpty().withMessage("Ingrese el departamento"),
+  check("supervisor")
+    .trim()
+    .notEmpty()
+    .withMessage("Ingrese el supervisor del empleado"),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  },
+];
+
+const validateExpenses = [
+  check("concept").trim().notEmpty().withMessage("Ingrese el concepto"),
+  check("date").trim().notEmpty().withMessage("Ingrese la fecha"),
+  check("id").trim().notEmpty().withMessage("Ingrese el id"),
+  check("account").trim().notEmpty().withMessage("Ingrese la cuenta"),
+  check("description").trim().notEmpty().withMessage("Ingrese la descripción"),
+  check("total")
+    .trim()
+    .notEmpty()
+    .withMessage("Ingrese el total")
+    .isNumeric()
+    .withMessage("Ingrese valor númerico"),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  },
+];
+
+module.exports = {
+  validateUser,
+  validateLogin,
+  validateEmployee,
+  validateExpenses,
+};

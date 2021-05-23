@@ -19,5 +19,9 @@ api.get(
   [md_auth.ensureAuth],
   EmployeeController.getAllEmployeesController
 );
-api.get("/get-employee/:id", EmployeeController.getEmployeeController);
+api.get(
+  "/get-employee/:id",
+  [md_auth.ensureAuth],
+  EmployeeController.getEmployeeController
+);
 module.exports = api;
